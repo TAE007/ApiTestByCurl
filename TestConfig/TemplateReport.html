@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页-API接口自动化测试报告</title>
+    <link rel="stylesheet" type="text/css" href="./Lib/report.css">
+    <script>
+    function showDetails(caseId){
+        var detailElement = document.getElementById(caseId);
+        detailElement.style.display="block";
+    }
+
+    function hideDetails(caseId){
+        var detailElement = document.getElementById(caseId);
+        detailElement.style.display="none";
+    }
+    </script>
+</head>
+<body>
+<div id="img-header">
+    <img src="./Lib/abc_banner.jpg">
+</div>
+<div id="main">
+    <table>
+        <h3 class="dataTitle">测试结果概况</h3>
+        <tr id="generalData">
+            <td>用例总数</td>
+            <td>{{totalModule}} 个</td>
+            <td>PASS</td>
+            <td><span class="goodData">{{passNumber}}</span> 个</td>
+            <td>FAIL</td>
+            <td><span class="badData">{{failNumber}}</span> 个</td>
+            <td>测试总耗时</td>
+            <td>{{totalCostTime}} ms</td>
+        </tr>
+    </table>
+    <table>
+        <h3 class="dataTitle">测试结果详情</h3>
+        <thead>
+        <th>模块</th>
+        <th>用例ID</th>
+        <th>用例名称</th>
+        <th>期望返回结构校验结果</th>
+        <th>期望返回值校验结果</th>
+        <th>耗时(ms)</th>
+        <th>操作</th>
+        </thead>
+        <tbody>
+        {% for module,allCaseRst in allTestCaseRunRst.items() %}
+        <tr>
+            <td rowspan="{{ allCaseRst|length }}">{{module}}</td>
+            <td><a target="_blank" href="{{allCaseRst[0].url}}">{{ allCaseRst[0].id }}</a></td>
+            <td>{{ allCaseRst[0].name }}</td>
+            <td class="{{ allCaseRst[0].structCheckRst }}">{{ allCaseRst[0].structCheckRst }}</td>
+            <td class="{{ allCaseRst[0].valueCheckRst }}">{{ allCaseRst[0].valueCheckRst }}</td>
+            <td>{{ allCaseRst[0].costTime }}</td>
+<!--            <td><a onclick="showDetails('{{ allCaseRst[0].id }}')">查看详情</a></td>-->
+            <td><a href="./Diff/{{ allCaseRst[0].id }}.html" target="_blank">查看详情</a></td>
+        </tr>
+        {% for caseRst in allCaseRst[1:] %}
+        <tr>
+            <td><a target="_blank" href="{{caseRst.url}}">{{caseRst.id}}</a></td>
+            <td>{{caseRst.name}}</td>
+            <td CLASS="{{ caseRst.structCheckRst }}">{{ caseRst.structCheckRst }}</td>
+            <td CLASS="{{ caseRst.valueCheckRst }}">{{ caseRst.valueCheckRst }}</td>
+            <td>{{ caseRst.costTime }}</td>
+<!--            <td><a onclick="showDetails('{{ caseRst.id }}')">查看详情</a></td>-->
+            <td><a href="./Diff/{{ caseRst.id }}.html" target="_blank">查看详情</a></td>
+        </tr>
+        {% endfor %}
+        {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+
+<footer id="id_footer">
+    Copyright &copy;2019 ABC诊所管家测试团队
+</footer>
+
+</body>
+</html>

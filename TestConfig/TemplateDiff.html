@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+
+<head>
+    <title>测试结果Diff-API接口自动化测试</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" media="all" href="../Lib/diff.css"/>
+    <script type="text/javascript" src="../Lib/diff.js"></script>
+</head>
+
+<body>
+<div class="container">
+    <div>
+        <span class="bold">用例ID:</span> {{ caseId }},
+        <span class="bold">用例名称:</span> {{ caseDesc }},
+        <span class="bold">测试结果:</span>
+        <span class="{{ testRst }} bold">{{ testRst }}</span>
+    </div>
+
+    <button onclick="showStructDiff()">查看返回结构对比结果</button>
+    <button onclick="showValueDiff()">查看返回值对比结果</button>
+    <div id="diff_show">
+        <div class="diff_output" id="struct_diff">{{ structDiffResult }}</div>
+        <div class="diff_output" id="value_diff">{{ valueDiffResult }}</div>
+    </div>
+
+</div>
+
+</body>
+
+</html>
